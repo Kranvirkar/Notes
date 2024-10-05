@@ -1,0 +1,87 @@
+https://ngrx.io/guide/schematics/install
+https://angular.io/cli/generate
+
+cmd
+code .  
+====================Service=========================
+ng g s services/serviceName --flat true --skipTests
+
+
+==============enum=========================
+
+ng g enum <name>
+
+
+================Actions===================
+
+ng add @ngrx/schematics@11.0.1
+Yes
+
+npm install @ngrx/effects@11.0.1 @ngrx/store@11.0.1 --save
+
+ng generate a ActionName [options] --skipTests
+
+ng generate a home/action/product --skipTests
+No
+No
+
+==================Effect==================
+
+ng generate effect EffectName [options]
+
+ng generate ef EffectName [options]
+
+ng generate effect User --root -m app.module.ts
+
+ng generate module User --flat false
+ng generate effect user/User -m user.module.ts
+ng generate effect home/home -m home.module.ts
+
+ng generate effect home/effects/home -m home/home/home.module.ts
+
+==================guard======================
+ng generate guard <name> [options]
+ng g guard <name> [options]
+
+=======================interceptor================
+ng generate interceptor <name> [options]
+ng g interceptor <name> [options]
+
+ng g interceptor home/interceptor/product --skipTests
+
+
+=============module===========================
+ng generate module <name> [options]
+ng g module <name> [options]
+
+==============pipe===============================
+ng generate pipe <name> [options]
+ng g pipe <name> [options]
+
+======================Reducer======================
+
+Generates a reducer file that contains a state interface, 
+an initial state object for the reducer,
+and a reducer function.
+
+ng generate reducer ReducerName [options]
+OR
+ng generate r ReducerName [options]
+
+ng generate r home/reducer/home --skipTests
+
+
+==================Selector=====================
+
+Generates a selector file for @ngrx/store.
+
+Command
+ng generate selector selectorName [options]
+OR
+ng generate se selectorName [options]
+
+============Module==================================
+ng g module home/home --route home --module app.module
+
+
+ng generate module app-routing --flat --module=app

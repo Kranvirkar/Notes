@@ -1,0 +1,26 @@
+===================LOG4J===============
+
+
+===Main Component===
+
+Loggers : Resposible for capturing logging info.
+
+Appenders: Responsible for publishing logging info to various preferred destination.
+
+Layouts  : Responsible for formatting logging information in differnt styles.
+
+
+Initializing Per Class
+
+private static Logger logger = logger.getLogger(<className>.class);
+private static Logger logger = logger.getLogger(ReportGenerator.class); 
+
+//Using BasicConfiguration
+BasicConfigurator.configure();
+
+logger.trace("This is trace message"); //TRACE LEVEL
+logger.debug("This is debug message"); //DEBUG LEVEL
+logger.info("This is info message"); //INFO LEVEL
+logger.warn("This is warn message"); //WARN LEVEL
+logger.error("This is error message"); //ERROR LEVEL
+logger.fatal("This is fatal message"); //FATAL LEVEL

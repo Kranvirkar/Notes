@@ -1,0 +1,181 @@
+git config --global user.name
+git config --global user.email
+
+
+git config --global user.name "kingrk123"
+git config --global user.email "ranvirkar.kiran@gmail.com"
+
+===============GIT====================
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M master
+git remote add origin https://github.com/kingrk123/SpringBoot.git
+git push -u origin master
+
+
+git help
+
+git init
+
+git status
+
+Staged files
+Un-Staged files
+Un-Tracked files
+
+git add 
+git add .
+git add --a  ==>All files
+
+git rm --cached <file>
+git rm --cached *  ==>All
+
+git commit -m 'Initial commit'
+
+git remote add origin https://github.com/kingrk123/JDBC.git
+git remote add origin https://github.com/kingrk123/SpringBoot.git
+
+git push -u origin master
+
+git diff   ==>Compare changes of working directory with staging area
+
+git diff --staged  ==>Compare changes of staging area with Local Repository
+git diff --staged HEAD
+
+git diff HEAD   ==>Compare changes of working directory with Local Repository
+
+git log  ==> it shows commits
+	commit-id
+	author
+	timestamp
+	commit msg
+
+git diff <commit-id1> <commit-id2>
+
+git diff HEAD HEAD~1
+
+git diff HEAD HEAD~2
+
+git diff HEAD~2 HEAD~4
+
+
+=============show=============
+
+git show <commit-id>
+
+git show HEAD~2
+
+==============who modified the file===========
+
+git annotate <file-name>
+
+
+=============what is in the file prev commit=============
+
+git checkout <commit-id>
+
+git switch -
+
+=====Changes in the file==========
+
+git status
+
+git add 
+git add --a  ==>All files
+
+git commit -m 'doProcess() method Added'
+
+git push
+
+git reset HEAD Test.java
+
+
+=============clone=========
+git clone https://github.com/kingrk123/JDBC.git
+
+git pull   ==>to take latest file
+
+=============stash================
+git status
+
+git stash  ==>temp file
+
+git stash apply
+
+
+==============Branch======================
+
+git branch
+
+git branch test  ==>New branch
+
+git checkout test
+
+git push origin test
+
+git checkout master
+
+git checkout -b dev   ==>create branch and switch
+
+git clone -b <branch-name> <repo-url>
+
+git push
+
+
+=================protected branch==============
+
+setting --> branch  
+
+================Merge========================
+
+git merge test
+
+========================TAG==============
+
+git tag
+
+git tag v1.0
+
+git tag
+
+git tag -a v1.1 <commitId> -m "v1.1"
+
+git log
+
+
+===================Revert changes===================
+-Reverting in working directly 
+git restore <fileName>   ====>It doesn`t work on new file
+
+git checkout -- <fileName> 
+
+rm - rf <fileName>
+
+-Revert changes from Staging Area
+ 
+git restore --staged <file_name>  #to revert changes from Staging area to working directory  
+
+git restore <file_name> #to revert changes from working directory  
+
+-Revert changes from Local Repository
+
+git reset HEAD~         # to revert changes from local repo to working directory
+
+git restore <file_name(s)> # to revert changes from working directory  
+
+==============Connecting github using SSH ======================
+
+https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+cd /root/.ssh
+cd ~/.ssh/
+
+ssh -keygen 
+
+
+
+
+
+
+ 

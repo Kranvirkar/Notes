@@ -1,0 +1,394 @@
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#install_docker
+
+spring-boot:build-image -DskipTests
+
+Steps to install Docker on Linux
+#sudo yum update -y
+
+#sudo amazon-linux-extras install docker
+
+#sudo service docker start
+
+#sudo usermod -a -G docker ec2-user
+
+#service docker status
+
+#cd /var/lib/docker
+
+#service docker stop
+
+#service docker status
+
+
+
+Current achine type
+#cat /etc/os-release
+
+#docker run -it ubuntu    
+Quiting terminal without stopping
+ctrl+p+q
+
+#docker ps
+
+#docker attach <ruuning container id>
+
+
+===================================================
+#docker images
+
+#docker ps		:showing Running Container
+
+#docker ps -a 		:showing Stop & Running Container
+
+#docker rm <container-id>	:Remove container
+
+#docker rm $(docker ps -aq)	::Remove all container
+
+
+#docker images -aq		:give all image id
+
+#docker rmi <image-id>		:remove one image
+ 
+#docker rmi $(docker images -aq)	:remove All images
+
+
+
+#docker run -it ubuntu		:going inside the container
+
+#docker ps
+
+#docker commit <container-id> <give any image name>    
+
+
+#docker run -it tomcat		:inside container
+
+#docker run -d tomcat		:outside container
+
+#docker run -d -p 8080:8080 tomcat:8.0  
+
+ 
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+============================Static Website========================
+
+Installing Docker
+      sudo amazon-list-extras list
+      sudo amazon-linux-extras
+update System
+      sudo yum update -y
+      sudo amazon-linux-extras install docker
+      docker -v
+
+Start Service
+      sudo service docker start
+      sudo usermod -a -G docker ec2-user
+      docker info
+      service docker status
+      docker info
+
+Start Service
+	systemctl start docker
+   	docker images
+   	docker ps
+   	chmod 777 /opt/
+
+Copy all Files in /opt/docker_app/
+   	cd /opt/docker_apps/
+   	ls
+   	cd medilab-web-site/
+   	ls
+
+Dockerfile
+	FROM nginx:latest
+	COPY . /usr/share/nginx/html
+
+building image from dockerfile
+   	docker build -t medilab-web-site .
+   	docker images
+   	docker run -d  -t --name=medilab-webserver -p 80:80 medilab-web-site
+   	docker ps
+   	docker ps -a
+   	docker rm 8bcf5f081ee2
+   	docker ps -a
+  
+
+====================================Node App===========================================
+
+Dockerfile
+
+	FROM node:latest
+	RUN mkdir /opt/items-app-service
+	WORKDIR /opt/items-app-service
+	COPY package.json /opt/items-app-service
+	RUN npm install
+	COPY . /opt/items-app-service
+	CMD [ "npm","start" ]
+
+Copy files in folder
+
+	docker build -t medilab-web-site .  	or
+	docker build -f Dockerfile -t item-app-image .
+
+	docker run -d  -t --name=item-app-service -p 3001:3000 item-app-image
+
+
+
+=================================Spring Monolithic=====================================
+
+Dockerfile
+
+	FROM java:8
+	RUN mkdir /opt/medilab-preclinic
+	WORKDIR  /opt/medilab-preclinic
+	COPY medilab-morning-preclinic.war /opt/medilab-preclinic/
+	CMD [ "java","-jar","medilab-morning-preclinic.war" ]
+
+copy files in folder
+
+	docker build -f Dockerfile -t medilab-preclinic-image .
+
+	docker run -d  -t --name=medilab-preclinic-service -p 5000:8087 medilab-preclinic-image
+
+====================================Micro-Services============================================
+
+Mysql Container
+
+	docker run -d -p 3306:3306 --name=department-service-mysql --env="MYSQL_ROOT_PASSWORD=root" --env="MYSQL_DATABASE=medilab-department-service" mysql
+
+	docker exec -it <container-id> bash
+
+		mysql -u root -p
+		pwd->root
+
+		show databases;
+
+copy files in folder
+
+	docker build -f Dockerfile -t medilab-department-image .
+
+	docker run -t --name=<any name that we want to give to container> --link <mysql-containername>:mysql -p <exposable_port>:<actual_service_port> <image_name>
+
+	docker run -t --name=medilab-department-container --link department-service-mysql:mysql -p 5003:9098> medilab-department-image
+
+	docker run -d  -t --name=medilab-department-service -p 5000:8087 medilab-department -image
+
+
+==================docker compose========================
+
+install docker compose
+
+	sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/sbin/docker-compose
+
+	sudo chmod +x /usr/local/bin/docker-compose
+
+	docker-compose version 
+
+==========================================================================================================
+
+
+===================Jenkins Automation==========================
+
+1.Create the machine for
+	Jenkins
+	Ansible
+	Docker host
+
+2. Connect through ssh
+
+3.setting up the Jenkin Server Machine
+
+	java
+
+		cd /
+		yum install java* -y
+		jave -version
+	
+	Jenkin
+		
+		wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+  		rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key		
+		yum install jenkins
+		systemctl start jenkins
+		service jenkins status
+		systemctl enablle jenkins
+		
+		browser <ip>:8080
+		password cat /var/lib/jenkins/secrets/initialAdminPassword
+
+	git
+		yum install git -y
+		git --version
+
+		
+	change the root password
+
+		passwd
+			new pwd
+			Retype  new pwd
+		
+	generate ssh key
+		ssh-keygen
+			Enter
+			Enter
+			Enter
+
+	copy the ssh key to ansible server
+		ssh-copy-id -i	root@<private ipv4 address>
+		Ansible server password
+		
+4.setting up the ansile server machine
+
+	Ansible
+		
+		amazon-linux-extras install ansible2 -y
+		ansible --version
+
+	Docker
+
+		yum install docker -y
+		systemctl enable docker
+		systemctl start docker
+		service docker status
+
+	change the root password
+
+		passwd
+			new pwd
+			Retype  new pwd
+			
+		cd /etc/ssh/
+		ls
+		vim sshd_config 
+			PermitRootLogin yes
+			PasswordAuthentication yes
+			#PasswordAuthentication no
+		systemctl restart sshd
+		systemctl reload sshd
+		chmod 777 /opt/
+	
+5.Jenkins
+
+	Manage Jenkins--->Manage plugins-->search-->publish over ssh-->install with restart	   		
+
+	Configure system 
+		Add SSH server ---bottom
+			Name--->MEDILAB_ANSIBLE-SERVER
+			HostName--->private ipv4 address
+			username--->root
+			Remote Directory-->/opt
+			
+			Above Pubish over SSH		
+			Passphrase--->Ansible password
+			Test Connection
+				
+				Apply--> Save
+
+	Manage Jenkins--->Global Tool Configuration-->Maven
+		Name-->MEDIAB_MAVEN	   		
+				Apply--> Save
+
+
+6.Github	
+
+	New Repository-->ashokit_devops_ci_cd
+		New branch--->medilab-preclinic-web-app--->create
+	
+	Click on settings repository
+		Webhooks -->Add webhooks
+		url -> <jenkins-public ip:8080>/github-webhook/
+		content type->application/json
+		secret->paste
+			Goto--->jenkins Administrator-->Configure--->API Token-->Add new Token-->Generate token->copy
+		Add   
+
+
+7.Jenkin
+
+	Manage Jenkin-->new item medilab-preclinic-pipeline-monolithic-->free style
+
+	//General -->Checkbox Github project-->project url
+ 	Sourcecode Managment -->git -->repo url --->branch-->medilab-preclinic-web-app
+
+	Buid Triggers -> Github hook trigger for GITSCm  Polling
+
+	Build-->Add Builds step-->invoke top-level Maven targets -->Maven Version-->MEDILABE_MAVEN -->Goals-->package -->apply-->save
+
+	Build Now
+	
+	Workspace -->u can see files
+	Goto jenkins server -->cd /var/lib/jenkins
+				ls
+				u can see workspace
+
+	Build-->Add Builds step-->send files or execute commmands over SSH -->Maven Version-->MEDILABE_MAVEN -->Goals-->package -->apply-->save
+
+		Source files -->target/medilab.war
+		Remove prefix -->target/
+		remote directory -->/medilab-preclinic
+
+		Add transfer set 
+		SSH server-->MEDILAB_ANSIBLE_SERVER
+			Advance-->enabe output verbose in console
+		Source files -->Dockerfile
+		remote directory -->/medilab-preclinic
+		
+		Exec command
+			docker build -t preclinic-img:latest /opt/medilab-preclinic
+			docker tag preclinic-img:latest vsjit/preclinic-img:latest
+			docker login -i vsjit -p vsjit@123
+			docker push vsjit/preclinic-img:latest
+			//docker rmi preclinic-img:latest 
+			//docker rmi vsjit/preclinic-img:latest
+			docker run -t --name=medilab-web-app -p 8087:8087  vsjit/preclinic-img:latest
+
+		Apply-->save
+
+	Post Build -->send build artifact over ssh
+		Source files -->medilab-playbook.yml
+		remote directory -->/medilab-preclinic
+		Exec command 
+			ansible-playbook /opt/medilab-preclinic/medilab-playbook.yml
+		Apply-->save
+
+Docker host machine server
+
+	Docker
+
+		yum install docker -y
+		systemctl enable docker
+		systemctl start docker
+		service docker status
+
+	change the root password
+
+		passwd
+			new pwd
+			Retype  new pwd
+
+		cd /etc/ssh/
+		ls
+		vim sshd_config 
+			PermitRootLogin yes
+			PasswordAuthentication yes
+			#PasswordAuthentication no
+		systemctl restart sshd
+		systemctl reload sshd
+		chmod 777 /opt/
+		

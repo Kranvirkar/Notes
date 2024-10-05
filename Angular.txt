@@ -1,0 +1,255 @@
+===============Angular==================
+
+
+
+-------------installation--------------
+
+install-->> node js
+https://nodejs.org/en/download/
+
+npm -v
+
+npm install -g @angular/cli@latest
+ng --version
+
+
+--------------Update----------------
+ng update @angular/cli @angular/core
+
+-----------Create App----------
+
+ng new Amazon
+
+ng serve
+
+Visual code -->extension ---PowerShell
+
+vscode Terminal 
+powershell.exe -NoLogo -NoProfile -Command 'Install-Module -Name PackageManagement -Force -MinimumVersion 1.4.6 -Scope CurrentUser -AllowClobber'
+
+
+
+---------------Workspace-----------------
+
+ng new Angular-workspace --createApplication="false"
+
+> cd Angular-workspace
+
+> ng generate application appName
+
+  ng generate application Amazon
+
+G:\Angular\Angular-workspace> ng serve --project=project
+
+
+-----------------changing the server port--------
+
+ng serve --port 5100
+
+
+-------------------creating class-----------------
+
+ng generate class sales-person
+
+
+------------bootstrap------------------
+
+ng add @ng-bootstrap/ng-bootstrap
+
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.css";
+	
+	../ → exit current folder and goto pervious level
+	./ → Access from current folder
+
+style.css
+@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+
+=========================fontawesome==================
+
+
+npm install @fortawesome/fontawesome-free
+
+style.css
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
+
+
+-----------------------------------------
+angular.json
+
+styles
+	"node_modules/bootstrap/dist/css/bootstrap.min.css",
+
+
+
+--------------Component------------
+
+app>ng g c component/twowaybinding --skipTests=true
+
+--------------------------------------------
+
+FAQ: What is difference between an attribute and property?
+A. Tags are defined with attribute.
+Attributes are used with static values.
+Elements are defined with properties.
+Properties are used with dynamic values.
+
+--------------------One Way binding----------------------------------
+
+- Interpolation {{ }}
+
+- Property Binding
+    *You can bind dynamic values directly to any property of an element in HTML.
+    *We use [ ] for property binding.
+    *Element must have relative property.
+
+- Attribute Binding
+    * Angular allows to bind the values to HTML tag attributes.
+    * As every attribute is not available as property , you have use attribute binding technique.
+    * Angular can bind to attribute if you defined the attribute name with prefix "attr".
+
+------------------------------------------------------------------
+
+-------------------fontawsome------------------------------
+Download and Configure Fontawesome:
+1.	https://fontawesome.com/how-to-use/on-the-web/setup/hosting-font-awesome-yourself
+2.	Download for Web
+3.	Extract and copy its folders
+4.	Go to Your workspace “node_modules”
+5.	 Create a new folder by name “fonts” and paste the copied files
+6.	Import into “styles.css” folder
+
+npm install @fortawesome/fontawesome-free
+
+@import "../../../node_modules/fonts/css/all.css";
+
+
+=============Adding Angular material===============
+
+ng add @angular/material
+
+? Which theme - Indigo - Pink
+? Set up global Angular Material typography styles? Y
+? Set up browser animations for Angular Material? Y
+
+Style.css
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+
+
+
+
+
+
+
+
+
+----------------------service--------------------
+
+App-modules
+
+providers: [ProductServiceService],
+
+
+service
+
+
+
+
+
+
+
+
+
+
+
+-----------routing---------------------
+
+ng generate module app-routing --flat --module=app
+
+
+
+---------------------------------------------------
+ng add @angular/localize
+
+
+
+
+[(page)]="thePageNumber"
+                                [pageSize]="thePageSize"
+                                [collectionSize]="theTotalElements"
+
+
+
+
+
+
+
+
+
+
+
+<div class="main-content">
+    <div class="section-content section-content-p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div *ngFor="let product of products">
+
+                <div class="col-md-3">
+                    <div class="product-box">
+                        <a href="product-detail.html">
+                            <img src="{{ product.image }}" class="img-responsive">
+                        </a>
+                        <div class="card-body">
+                            <h1></h1>
+                            <h3 class="card-title">{{ product.name }}</h3>
+                            
+                            <div class="price">Price $ {{ product.price }}</div>
+                          </div>
+                </div>
+
+            </div></div>
+            </div></div>
+            </div>
+
+
+
+<div class="container">
+  <div *ngFor="let product of products">
+    <div class="card-group">
+      <!--bootstrap card with 3 horizontal images-->
+      <div class="row">
+        <div class="card col-md-4">
+          <img class="card-img-top" src="{{ product.image }}" />
+
+          <div class="card-body">
+            <h1></h1>
+            <h3 class="card-title">{{ product.name }}</h3>
+            <rating_bar
+              [product_rating]="product.rating"
+              [numReviews]="product.numReviews" >
+            </rating_bar>
+            <div class="price">Price $ {{ product.price }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <h1>{{loading}}.....{{products | json}}....{{error}}</h1> -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                (pageChange)="listProducts()"

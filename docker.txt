@@ -1,0 +1,126 @@
+#docker --version
+
+#docker run -p 5000:5000 in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+detached mode : running in background
+#docker run -p 5000:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+o/p: getting id
+
+#docker logs id
+
+#docker login  
+
+#docker container ls
+
+#docker container stop 56eb9f62d07b
+
+#docker images
+
+Container Running
+#docker container ls -a
+
+
+========================Images==========================
+
+#docker images
+
+#docker pull mysql
+
+#docker images
+
+#docker search mysql
+
+#docker image history <image-id>
+
+#docker image inspect <image-id>
+
+#docker image remove <image-id>
+
+
+========================Container========================
+
+#docker container run -p 5000:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+#docker container pause <container-id>
+
+#docker logs -f <container-id>
+
+#docker container unpause <container-id>
+
+#docker container inspect <container-id>
+
+#docker container ls -a
+
+remove
+#docker container prune
+
+#docker container logs -f <created-id>
+
+#docker container stop <created-id> 
+
+Check container running or not
+#docker container ls -a
+
+#docker container kill <created-id> 
+
+#docker container prune
+
+
+============================system stat=====================
+
+#docker system df //imp
+#docker events
+---------------
+#docker container ls
+
+#docker container stop <created-id>
+----------------------
+#docker container ls -a
+
+#docker top <created-id>
+
+#docker stats  
+
+memory 512MB ,cpu quota 100000
+#docker run -p 5000:5000 -m 512m --cpu-quota 5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+=========================zipkin=====================
+#docker run -p 9411:9411 openzipkin/zipkin:2.23
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
